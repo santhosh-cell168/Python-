@@ -22,5 +22,6 @@ jobs:
             cd /home/ubuntu/python-app
             git pull origin main
             sudo pip3 install -r requirements.txt --break-system-packages
-            sudo pkill -f "python3 app.py" || true
+            sudo kill $(sudo lsof -t -i:80) || true
             sudo nohup python3 app.py > /tmp/app.log 2>&1 &
+            disown
